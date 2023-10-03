@@ -7,8 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - run: apt install ffmpeg
     - run: pip install yt-dlp
-    - run: yt-dlp https://vicparl-broadcast.akamaized.net/hls/live/2041942/pov-mob-lc/master.m3u8 -o "%(epoch)s"
+    - run: yt-dlp https://vicparl-broadcast.akamaized.net/hls/live/2041942/pov-mob-lc/master.m3u8 -o "%(epoch>%d/%m/%y %H:%M)s"
     - uses: EndBug/add-and-commit@v7
       with: 
         message: 'upload recording'
