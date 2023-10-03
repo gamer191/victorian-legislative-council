@@ -4,12 +4,12 @@ permissions:
   contents: write
 jobs:
   record:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
     - uses: FedericoCarboni/setup-ffmpeg@v2
     - run: pip install yt-dlp
-    - run: sudo yt-dlp --verbose https://vicparl-broadcast.akamaized.net/hls/live/2041942/pov-mob-lc/master.m3u8 -o "%(epoch)s.%(ext)s"
+    - run: yt-dlp --verbose https://vicparl-broadcast.akamaized.net/hls/live/2041942/pov-mob-lc/master.m3u8 -o "%(epoch)s.%(ext)s"
     - uses: EndBug/add-and-commit@v7
       with: 
         message: 'upload recording'
