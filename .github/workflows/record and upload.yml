@@ -1,2 +1,14 @@
 name: record and upload
-on:
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - run: pip install yt-dlp
+    - run: yt-dlp https://vicparl-broadcast.akamaized.net/hls/live/2041942/pov-mob-lc/master.m3u8 -o "%(epoch)s"
+    - uses: EndBug/add-and-commit@v7
+      with: 
+        message: 'upload recording'
