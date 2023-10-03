@@ -1,7 +1,5 @@
 name: record and upload
 on: [workflow_dispatch,push]
-permissions:
-  contents: write
 jobs:
   record:
     runs-on: windows-latest
@@ -10,6 +8,6 @@ jobs:
     - uses: FedericoCarboni/setup-ffmpeg@v2
     - run: pip install yt-dlp
     - run: yt-dlp --verbose https://vicparl-broadcast.akamaized.net/hls/live/2041942/pov-mob-lc/master.m3u8 -o "%(epoch)s.%(ext)s"
-    - uses: EndBug/add-and-commit@v7
+    - uses: EndBug/add-and-commit@v9
       with: 
         message: 'upload recording'
